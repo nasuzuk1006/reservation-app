@@ -2,7 +2,7 @@
     <br>
     <div class="row">
         <div *ngFor="let product of products; let productId = index" class="col-sm">
-            <a routerLink="detail/{{productId}}" routerLinkActive="active" ariaCurrentWhenActive="page">
+            <a routerLink="detail/{{product._id}}" routerLinkActive="active" ariaCurrentWhenActive="page">
                 <div class="card">
                     <img src="{{ product.coverImage }}" class="card-img" alt="...">
                     <div class="card-body">

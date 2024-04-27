@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 
-import { products } from '../../products';
+import { ProductService } from '../shared/product.service';
 
 @Component({
   selector: 'app-product-list',
@@ -13,11 +13,16 @@ import { products } from '../../products';
 })
 export class ProductListComponent implements OnInit{
   products: any
-  //products: any = [...products];
 
-  constructor() {}
+  constructor(private productService: ProductService) {}
 
   ngOnInit(): void {
-    this.products = products;
+
+    const productObservable = this.productService.getProducts()
+    productObservable.subscribe({
+      next: (data) => { this.products = data },
+      error: (err) => { console.error('次のエラーが発生しました：' + err) }
+    })
+
   }
 }
